@@ -24,15 +24,15 @@ class Login(Model):
         user_data = {'email': info['email']}
         user = self.db.query_db(user_query, user_data)
         if user:
-           # check_password_hash() compares encrypted password in DB to one provided by user logging in
+
             if self.bcrypt.check_password_hash(user[0]['password'], password):
                 return {
                     "status": True,
                     "user": user[0]
                 }
-        # Whether we did not find the email, or if the password did not match, either way return False
-            else:
-                errors.append('Password and email combination does not match!')
+
+        else:
+        errors.append('Password and email combination does not match!')
         return {
             "status": False,
             "errors": errors
@@ -41,7 +41,7 @@ class Login(Model):
     def create_user(self, info):
         EMAIL_REGEX = re.compile(r'^[a-za-z0-9\.\+_-]+@[a-za-z0-9\._-]+\.[a-za-z]*$')
         errors = []
-        # Some basic validation
+        #Validation
         if not info['first_name']:
             errors.append('First name cannot be blank')
         elif len(info['first_name']) < 2:
