@@ -31,8 +31,7 @@ class Login(Model):
                     "user": user[0]
                 }
 
-        else:
-        errors.append('Password and email combination does not match!')
+        errors.append('Password and email combination do not match! Please try again')
         return {
             "status": False,
             "errors": errors
