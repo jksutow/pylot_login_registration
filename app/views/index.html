@@ -3,6 +3,49 @@
     <link rel="stylesheet" href="/static/css/styles.css" type="text/css">
   </head>
   <body>
-    The best place to start is the "WelcomeController.py" file in app/controllers.
+
+    {% with messages = get_flashed_messages(with_categories=true, category_filter=["regis_errors"]) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <p class="text-danger {{category}}">* {{message}}</p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <h1>Registration</h1>
+
+    <div class="register">
+      <form class="register" action="/users" method="post">
+        First Name: <input type="text" name="first_name">
+        Last Name: <input type="text" name="last_name">
+        Email: <input type="text" name="email">
+        Password: <input type="password" name="password">
+        Confirm Password: <input type="password" name="confirm_pw">
+        <input type="submit" value="Register">
+      </form>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true, category_filter=["login_errors"]) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <p class="text-danger {{category}}">* {{message}}</p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <h1>Login</h1>
+    <div class="login">
+      <form class="login" action="/users/login" method="post">
+        Email: <input type="text" name="email">
+        Password: <input type="password" name="password">
+        <input type="submit" value="Login">
+      </form>
+    </div>
+
   </body>
+
+  <style>
+    div, input{
+      display: block;
+    }
+  </style>
 </html>
